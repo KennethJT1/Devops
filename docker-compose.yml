@@ -1,0 +1,10 @@
+services:
+  devops-docker-cont:
+    build: .
+    ports:
+      - "5009:5009"
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    environment:
+      - PORT=5009

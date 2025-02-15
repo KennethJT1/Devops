@@ -1,0 +1,9 @@
+services:
+  devops-docker-cont:
+    build:
+      context: .
+      args:
+        NODE_ENV: production
+    environment:
+      - NODE_ENV=production
+    command: yarn start
