@@ -1,0 +1,47 @@
+### create
+POST http://localhost:4000/api/posts HTTP/1.1
+content-type: application/json
+
+{
+    "title": "sample 4",
+    "body": "body 4"
+}
+
+### create user
+POST http://localhost:5009/api/users/register HTTP/1.1
+content-type: application/json
+
+{
+    "userName": "sample 4",
+    "password": "body 4"
+}
+
+### login user
+POST http://localhost:5009/api/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "userName": "sample 4",
+    "password": "body 4"
+}
+
+### get all posts
+GET http://localhost:4000/api/posts HTTP/1.1
+content-type: application/json
+
+### get single
+GET http://localhost:4000/api/posts/67b33bdd583332b5569e21f5 HTTP/1.1
+content-type: application/json
+
+### update
+PUT http://localhost:4000/api/posts/67b33bdd583332b5569e21f5 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Updated Title",
+  "body": "Updated body content."
+}
+
+### delete
+DELETE http://localhost:4000/api/posts/67b33afcc770b78f34276160 HTTP/1.1
+

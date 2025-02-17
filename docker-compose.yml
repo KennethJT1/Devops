@@ -8,3 +8,19 @@ services:
       - /app/node_modules
     environment:
       - PORT=5009
+    depends_on:
+    - mongo
+
+  mongo:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dockerdb
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes: 
+      - mongo-db:/data/db
+
+  redis:
+    image: redis
+
+volumes:
+  mongo-db:

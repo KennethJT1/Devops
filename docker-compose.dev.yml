@@ -9,4 +9,11 @@ services:
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      - MONGO_USER=dockerdb
+      - MONGO_PASSWORD=password
+      - SESSION_SECRET=secret
     command: yarn dev
+  mongo:
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: dockerdb
+      MONGO_INITDB_ROOT_PASSWORD: password
