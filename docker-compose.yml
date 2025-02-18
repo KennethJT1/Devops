@@ -1,22 +1,24 @@
 services:
+  nginx:
+    image: nginx:stable-alpine
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
   devops-docker-cont:
     build: .
-    ports:
-      - "5009:5009"
     volumes:
       - ./:/app
       - /app/node_modules
     environment:
       - PORT=5009
     depends_on:
-    - mongo
+      - mongo
 
   mongo:
     image: mongo
     environment:
       MONGO_INITDB_ROOT_USERNAME: dockerdb
       MONGO_INITDB_ROOT_PASSWORD: password
-    volumes: 
+    volumes:
       - mongo-db:/data/db
 
   redis:

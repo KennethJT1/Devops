@@ -1,4 +1,7 @@
 services:
+  nginx:
+    ports:
+      - 5009:80
   devops-docker-cont:
     build:
       context: .

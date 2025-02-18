@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const redis = require("redis");
+const cors = require("cors");
 const session = require("express-session");
 const redisStore = require("connect-redis");
 
@@ -25,7 +26,6 @@ if (!SESSION_SECRET) {
   console.error("❌ SESSION_SECRET is missing! Set it in your .env file.");
   process.exit(1);
 }
-
 
 // Create Redis client
 let redisClient = redis.createClient({
@@ -69,16 +69,18 @@ const connectWithRetry = () => {
 
 connectWithRetry();
 
+app.enable("trust proxy");
+app.use(cors( ))
 app.use(
   session({
     store: new redisStore.RedisStore({
-      client: redisClient,
+      client: redisClient, 
     }),
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
-      maxAge: 30000,
+      maxAge: 60000,
       secure: false,
       httpOnly: true,
     },
@@ -87,8 +89,9 @@ app.use(
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.send("Welcome to the Express Server");
+  console.log("Yeah its running!!!")
 });
 
 app.use("/api/posts", postRoutes);

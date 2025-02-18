@@ -21,6 +21,7 @@ exports.registerUser = async (req, res) => {
     const newUser = new User({ userName, password: hashedPassword });
     await newUser.save();
 
+    req.session.user = newUser;
     return res.status(201).json({ message: "User registered successfully." });
   } catch (error) {
     return res
@@ -52,7 +53,8 @@ exports.loginUser = async (req, res) => {
       process.env.JWT_SECRET || "your_secret",
       { expiresIn: "1h" }
     );
-    req.session.userId = user._id;
+    // req.session.userId = user._id;
+    req.session.user = user;
 
     return res.status(200).json({ message: "Login successful.", token });
   } catch (error) {
